@@ -10,5 +10,8 @@
   "homepage": "https://github.com/Atsumi-Gakuto/IoTSensorModule-LogAnalyzer",
   "bugs": {
     "url": "https://github.com/Atsumi-Gakuto/IoTSensorModule-LogAnalyzer/issues"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }
