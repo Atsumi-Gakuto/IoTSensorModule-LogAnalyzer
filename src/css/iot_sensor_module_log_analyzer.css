@@ -1,3 +1,16 @@
 h3 {
     margin: 3em 0 1em 0;
 }
+
+#result_images {
+    display: flex;
+    flex-direction: column;
+}
+
+#result_images > canvas {
+    width: fit-content;
+}
+
+#result_images > canvas:not(canvas:first-child) {
+    margin-top: -2px;
+}

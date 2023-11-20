@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>IoTセンサモジュール ログ解析ツール</title>
-        <script defer src="../js/iot_sensor_module_log_analyzer.js"></script>
+        <script defer type="module" src="../js/iot_sensor_module_log_analyzer.js"></script>
         <link rel="stylesheet" href="../css/iot_sensor_module_log_analyzer.css">
     </head>
     <body>
@@ -11,6 +11,8 @@
         <h3>ログ入力</h3>
         <input id="log_input" type="file" accept=".log">
         <h3>結果出力</h3>
-        <canvas id="result"></canvas>
+        <div id="result_images">
+
+        </div>
     </body>
 </html>
