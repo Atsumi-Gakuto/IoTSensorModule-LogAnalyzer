@@ -30,7 +30,7 @@ jobs:
         run: ../../../node_modules/.bin/tsc
         working-directory: ./src/main/ts
       - name: Fix javascript files
-        run: node ./src/npm/ts/import_fixer.js
+        run: node ./src/npm/js/import_fixer.js
       - name: Remove source files
         run: rm -rf ./src/main/ts
       - name: Upload page artifact
