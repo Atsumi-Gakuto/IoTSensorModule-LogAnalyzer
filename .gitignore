@@ -132,3 +132,4 @@ dist
 # User defined
 .vscode/settings.json
 src/main/js
+src/npm/js/
