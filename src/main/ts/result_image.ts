@@ -32,6 +32,22 @@ export class ResultImage {
     }
 
     /**
+     * 結果画像が持つ日付の月を返す。
+     * @returns 結果画像が持つ日付の月。日付を持っていない場合は-1を返す。
+     */
+    public getMonth(): number {
+        return this.imageDate != undefined ? this.imageDate.getMonth() : -1;
+    }
+
+    /**
+     * 結果画像が持つ日付の日を返す。
+     * @returns 結果画像が持つ日付の日。日付を持っていない場合は-1を返す。
+     */
+    public getDate(): number {
+        return this.imageDate != undefined ? this.imageDate.getDate() : -1;
+    }
+
+    /**
      * 結果出力の背景を描画する。
      */
     public drawBackground(): void {

@@ -10,7 +10,6 @@ class IotSensorModuleLogAnalyzer {
      * メイン関数。getContext()を実行した後に実行する。
      */
     public main(): void {
-        this.resultImageManager.addImage(new Date());
     }
 }
 
