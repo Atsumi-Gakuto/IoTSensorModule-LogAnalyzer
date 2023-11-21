@@ -8,12 +8,19 @@ export class ResultImage {
     private readonly imageElement: HTMLCanvasElement;
 
     /**
-     * コンストラクタ
+     * 結果画像が持つ日付（時刻は無視しても構わない。）
      */
-    constructor() {
+    private readonly imageDate: Date|undefined;
+
+    /**
+     * コンストラクタ
+     * @param date この画像の日付
+     */
+    constructor(date?: Date) {
         this.imageElement = document.createElement("canvas");
         this.imageElement.width = 800;
         this.imageElement.height = 130;
+        this.imageDate = date;
     }
 
     /**
@@ -26,9 +33,8 @@ export class ResultImage {
 
     /**
      * 結果出力の背景を描画する。
-     * @param date 背景に入れる日付
      */
-    public drawBackground(date?: Date): void {
+    public drawBackground(): void {
         if(this.imageElement.getContext != undefined) {
             const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
             context.strokeStyle = "black";
@@ -50,11 +56,11 @@ export class ResultImage {
                 context.stroke();
                 context.fillText(i.toString(), i * 31.67 + 20, 80);
             }
-            if(date != undefined) {
+            if(this.imageDate != undefined) {
                 context.fillStyle = "darkgray";
                 context.textAlign = "start";
                 context.font = "24px sans-serif";
-                context.fillText(date.toLocaleDateString(), 20, 40);
+                context.fillText(this.imageDate.toLocaleDateString(), 20, 40);
             }
         }
     }

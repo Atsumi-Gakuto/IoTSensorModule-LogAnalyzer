@@ -12,8 +12,8 @@ export class ResultImageManager {
      * @returns 背景画像のキャンバス要素
      */
     public addImage(date?: Date): void {
-        const newImage: ResultImage = new ResultImage();
-        newImage.drawBackground(date);
+        const newImage: ResultImage = new ResultImage(date);
+        newImage.drawBackground();
         (document.getElementById("result_images") as HTMLDivElement).appendChild(newImage.getElement());
         this.resultImages.push(newImage);
     }
