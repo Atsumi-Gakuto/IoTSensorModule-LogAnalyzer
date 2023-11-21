@@ -37,4 +37,11 @@ export class ResultImageManager {
         }
         return -1;
     }
+
+    /**
+     * 背景画像のインスタンスをすべて削除する。
+     */
+    public removeResultImages(): void {
+        while(this.resultImages.shift() != undefined);
+    }
 }
