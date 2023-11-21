@@ -10,4 +10,4 @@ export function fixImport(rootPath: string): void {
     });
 }
 
-if(require.main == module) fixImport("../../main/");
+if(require.main == module) fixImport("./src/main/js/");
