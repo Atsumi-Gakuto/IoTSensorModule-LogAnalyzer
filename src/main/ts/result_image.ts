@@ -96,7 +96,7 @@ export class ResultImage {
     }
 
     /**
-     * 入力された期間を白くする。
+     * 入力された期間を黒くする。
      * @param timeStart 期間開始時刻（日付は無視する。）
      * @param timeEnd 期間終了時刻（日付は無視する。）
      */
@@ -105,8 +105,8 @@ export class ResultImage {
             const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
             context.fillStyle = "#00000088";
             context.beginPath();
-            const startPos: number = 760 * ((timeStart.getHours() * 60 + timeStart.getMinutes()) / 1440) + 20;
-            context.rect(startPos, 60, 760 * ((timeEnd.getHours() * 60 + timeEnd.getMinutes()) / 1440) + 20 - startPos, 58);
+            const startPos: number = (timeStart.getHours() == 0 && timeStart.getMinutes() == 0) ? 0 : 760 * ((timeStart.getHours() * 60 + timeStart.getMinutes()) / 1440) + 20;
+            context.rect(startPos, 0, ((timeEnd.getHours() == 23 && timeEnd.getMinutes() == 59) ? 800 : 760 * ((timeEnd.getHours() * 60 + timeEnd.getMinutes()) / 1440) + 20) - startPos, 130);
             context.fill();
         }
     }

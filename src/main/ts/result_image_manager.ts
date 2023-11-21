@@ -16,6 +16,14 @@ export class ResultImageManager {
     }
 
     /**
+     * 結果画像のインスタンスの数を返す。
+     * @returns 結果画像のインスタンスの数
+     */
+    public getImageCount(): number {
+        return this.resultImages.length
+    }
+
+    /**
      * 結果画像のインスタンスを追加する。
      * @param date 背景に入れる日付
      * @returns 追加されたインスタンスのインデックス番号

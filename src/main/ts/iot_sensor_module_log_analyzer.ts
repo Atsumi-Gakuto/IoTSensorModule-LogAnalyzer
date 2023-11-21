@@ -17,6 +17,7 @@ class IotSensorModuleLogAnalyzer {
     private async generateResultImage(log: Blob): Promise<void> {
         const reader: ReadableStreamDefaultReader<Uint8Array> = log.stream().getReader();
         let firstLog: boolean = true;
+        let lastTime: Date|undefined;
         let lineStringChunk: string = "";
         while(true) {
             const chunk: ReadableStreamReadResult<Uint8Array> = await reader.read();
@@ -38,14 +39,26 @@ class IotSensorModuleLogAnalyzer {
                     if(logData != null) {
                         const logDate: Date = new Date(Number(logData[1]), Number(logData[2]) - 1, Number(logData[3]), Number(logData[4]), Number(logData[5]), Number(logData[6]), Number(logData[7]));
                         let targetImage: number = this.resultImageManager.indexOf(logDate);
-                        if(targetImage == -1) {
-                            targetImage = this.resultImageManager.addImage(logDate);
+                        if(targetImage == -1) targetImage = this.resultImageManager.addImage(logDate);
+                        if(firstLog) {
+                            const startTime: Date = new Date();
+                            startTime.setHours(0);
+                            startTime.setMinutes(0);
+                            (this.resultImageManager.getImage(targetImage) as ResultImage).dimPeriod(startTime, logDate);
+                            firstLog = false;
                         }
                         if(logData[8] == "Si1132 command error") (this.resultImageManager.getImage(targetImage) as ResultImage).plot(logDate);
+                        lastTime = logDate;
                     }
                 }
             }
             else break;
+        }
+        if(lastTime != undefined) {
+            const endTime: Date = new Date();
+            endTime.setHours(23);
+            endTime.setMinutes(59);
+            (this.resultImageManager.getImage(this.resultImageManager.getImageCount() - 1) as ResultImage).dimPeriod(lastTime, endTime);
         }
     }
 
