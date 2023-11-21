@@ -60,6 +60,7 @@ class IotSensorModuleLogAnalyzer {
             endTime.setMinutes(59);
             (this.resultImageManager.getImage(this.resultImageManager.getImageCount() - 1) as ResultImage).dimPeriod(lastTime, endTime);
         }
+        (document.getElementById("process_status") as HTMLParagraphElement).innerText = `処理完了`;
     }
 
     /**
@@ -78,6 +79,7 @@ class IotSensorModuleLogAnalyzer {
         (document.getElementById("log_input") as HTMLInputElement).addEventListener("change", async (event: Event) => {
             this.removeResultImage();
             if(((event.target as HTMLInputElement).files as FileList).length == 1) this.generateResultImage(((event.target as HTMLInputElement).files as FileList)[0]);
+            else (document.getElementById("process_status") as HTMLParagraphElement).innerText = `ログファイル待機中...`;
         });
     }
 }
