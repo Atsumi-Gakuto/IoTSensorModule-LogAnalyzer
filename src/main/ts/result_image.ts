@@ -61,14 +61,30 @@ export class ResultImage {
 
     /**
      * 入力された時刻の位置に点をプロットする。
-     * @param date プロットする時刻
+     * @param time プロットする時刻（日付は無視する。）
      */
-    public plot(date: Date): void {
+    public plot(time: Date): void {
         if(this.imageElement.getContext != undefined) {
             const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
             context.fillStyle = "red";
             context.beginPath();
-            context.arc(760 * ((date.getHours() * 60 + date.getMinutes()) / 1440) + 20, 100, 4, 0, Math.PI * 2);
+            context.arc(760 * ((time.getHours() * 60 + time.getMinutes()) / 1440) + 20, 100, 4, 0, Math.PI * 2);
+            context.fill();
+        }
+    }
+
+    /**
+     * 入力された期間を白くする。
+     * @param timeStart 期間開始時刻（日付は無視する。）
+     * @param timeEnd 期間終了時刻（日付は無視する。）
+     */
+    public dimPeriod(timeStart: Date, timeEnd: Date): void {
+        if(this.imageElement.getContext != undefined && timeStart.getHours() * 60 + timeStart.getMinutes() < timeEnd.getHours() * 60 + timeEnd.getMinutes()) {
+            const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
+            context.fillStyle = "#00000088";
+            context.beginPath();
+            const startPos: number = 760 * ((timeStart.getHours() * 60 + timeStart.getMinutes()) / 1440) + 20;
+            context.rect(startPos, 60, 760 * ((timeEnd.getHours() * 60 + timeEnd.getMinutes()) / 1440) + 20 - startPos, 58);
             context.fill();
         }
     }
