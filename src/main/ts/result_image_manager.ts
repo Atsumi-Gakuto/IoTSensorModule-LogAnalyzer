@@ -18,12 +18,14 @@ export class ResultImageManager {
     /**
      * 結果画像のインスタンスを追加する。
      * @param date 背景に入れる日付
+     * @returns 追加されたインスタンスのインデックス番号
      */
-    public addImage(date?: Date): void {
+    public addImage(date?: Date): number {
         const newImage: ResultImage = new ResultImage(date);
         newImage.drawBackground();
         (document.getElementById("result_images") as HTMLDivElement).appendChild(newImage.getElement());
         this.resultImages.push(newImage);
+        return this.resultImages.length - 1;
     }
 
     /**
@@ -33,7 +35,7 @@ export class ResultImageManager {
      */
     public indexOf(date: Date): number {
         for(let i = 0; i < this.resultImages.length; i++) {
-            if(this.resultImages[i].getMonth() == date.getMonth() && this.resultImages[i].getDate() == date.getDay()) return i;
+            if(this.resultImages[i].getMonth() == date.getMonth() && this.resultImages[i].getDate() == date.getDate()) return i;
         }
         return -1;
     }
