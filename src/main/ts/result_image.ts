@@ -28,13 +28,15 @@ export class ResultImage {
      * 結果出力の背景を描画する。
      * @param date 背景に入れる日付
      */
-    public drawBackground(date?: Date) {
+    public drawBackground(date?: Date): void {
         if(this.imageElement.getContext != undefined) {
             const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
             context.strokeStyle = "black";
             context.lineWidth = 1;
+            context.beginPath();
             context.rect(1, 1, 798, 128);
             context.stroke();
+            context.beginPath();
             context.moveTo(20, 100);
             context.lineTo(780, 100);
             context.stroke();
@@ -42,6 +44,7 @@ export class ResultImage {
             context.textAlign = "center";
             context.font = "16px sans-serif";
             for(let i = 0; i < 25; i++) {
+                context.beginPath();
                 context.moveTo(i * 31.67 + 20, 90);
                 context.lineTo(i * 31.67 + 20, 110);
                 context.stroke();
@@ -53,6 +56,20 @@ export class ResultImage {
                 context.font = "24px sans-serif";
                 context.fillText(date.toLocaleDateString(), 20, 40);
             }
+        }
+    }
+
+    /**
+     * 入力された時刻の位置に点をプロットする。
+     * @param date プロットする時刻
+     */
+    public plot(date: Date): void {
+        if(this.imageElement.getContext != undefined) {
+            const context: CanvasRenderingContext2D = this.imageElement.getContext("2d") as CanvasRenderingContext2D;
+            context.fillStyle = "red";
+            context.beginPath();
+            context.arc(760 * ((date.getHours() * 60 + date.getMinutes()) / 1440) + 20, 100, 4, 0, Math.PI * 2);
+            context.fill();
         }
     }
 }
