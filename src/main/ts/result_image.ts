@@ -73,10 +73,10 @@ export class ResultImage {
                 context.fillText(i.toString(), i * 31.67 + 20, 80);
             }
             if(this.imageDate != undefined) {
-                context.fillStyle = "darkgray";
                 context.textAlign = "start";
                 context.font = "24px sans-serif";
-                context.fillText(this.imageDate.toLocaleDateString(), 20, 40);
+                const dayName: string[] = ["日", "月", "火", "水", "木", "金", "土"];
+                context.fillText(`${this.imageDate.toLocaleDateString()}（${dayName[this.imageDate.getDay()]}）`, 20, 40);
             }
         }
     }
